@@ -1,0 +1,167 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>社区医疗-用户中心</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+
+    <script type="text/javascript" src="js/vue-2.5.16.js"></script>
+    <script type="text/javascript" src="js/axios-0.18.0.min.js"></script>
+</head>
+<body>
+
+
+<div class="header_con">
+
+   <div class="header">
+
+      <div class="welcome fl" style="color: rgba(255,255,255,0.6)">
+          <span><a href="#">首页</a></span>&nbsp|&nbsp
+          <span><a href="#">消费者业务网站</a></span>&nbsp|&nbsp
+          <span><a href="#">V码(优购码)</a></span>&nbsp|&nbsp
+          <span><a href="#">企业商用</a></span>&nbsp|&nbsp
+          <span><a href="#">Select Region</a></span>&nbsp|&nbsp
+      </div>
+
+      <div id='app' class="fr">
+         <div v-if="mobile" class="login_btn fl" style="color: #8ad504">
+            欢迎您：<em>[[ mobile ]]</em>
+            <a @click="logoutfunc" class="quit" style="margin-left: 25px">退出</a>
+         </div>
+
+         <div v-else class="login_btn fl">
+            <a href="/login.html">请登录</a>
+            <span>|</span>
+            <a href="register.html">注册</a>
+         </div>
+
+         <div class="user_link fl">
+            <span>|</span>
+            <a href="/my_order.html">我的订单</a>
+            <span>|</span>
+            <a href="/cart.html">客服</a>
+            <span>|</span>
+            <a href="/user_center_order.html">收货地址</a>
+             <span>|</span>
+            <a href="/carts.html">
+    <img src="images/cart.png" alt="购物车" width="15px" height="15px">
+    我的购物车
+</a>
+         </div>
+
+
+      </div>
+   </div>
+</div>
+<div class="content">
+    <div style="height: 100px; background-color: white; display: flex; flex-direction: row;">
+        <div style="margin-left: 100px;">
+            <a href="index.html"><img src="images/logo.png" width="280px" height="100px"></a>
+        </div>
+        <div class='head_menu' style="display: flex; flex-direction: row; margin-top: 35px; margin-left: 60px;">
+            <div style="font-size: 21px;"><a href="#">盒温</a></div>
+            <div style="font-size: 21px; margin-left: 20px;"><a href="#">盒温智行</a></div>
+            <div style="font-size: 21px; margin-left: 20px;"><a href="#">盒温智选</a></div>
+            <div style="font-size: 21px; margin-left: 20px;"><a href="#">生态周边</a></div>
+        </div>
+    </div>
+</div>
+<div id="app2">
+    <div class="main_con clearfix" style="margin-top: 45px">
+
+        <div class="right_content clearfix">
+                <div class="site_top_con">
+                    <a @click="show_add">新增收货地址</a>
+                    <span>您已创建了<b>{{addresses.length}}</b>个收货地址，最多可创建<b>{{ limit }}</b>个</span>
+                </div>
+                <div class="site_con" v-for="(address, index) in addresses">
+                    <div class="site_title">
+                        <div v-if="is_set_title[index]">
+                            <input v-model="input_title" type="text" name="">
+                            <input @click="save_title(index)" type="button" name="" value="保 存">
+                            <input @click="cancel_title(index)" type="reset" name="" value="取 消">
+                        </div>
+                        <div v-else>
+                            <h3>{{ address.title }}</h3>
+                            <a @click="show_edit_title(index)"></a>
+                        </div>
+                        <em v-if="address.id==default_address_id">默认地址</em>
+                        <span @click="del_address(index)">×</span>
+                    </div>
+                    <ul class="site_list">
+                        <li><span>收货人：</span><b>{{ address.receiver }}</b></li>
+                        <li><span>所在地区：</span><b>{{ address.province }} {{address.city}} {{ address.district }}</b></li>
+                        <li><span>地址：</span><b>{{ address.place }}</b></li>
+                        <li><span>手机：</span><b>{{ address.mobile }}</b></li>
+                        <li><span>固定电话：</span><b>{{ address.tel }}</b></li>
+                        <li><span>电子邮箱：</span><b>{{ address.email }}</b></li>
+                    </ul>
+                    <div class="down_btn">
+                        <a v-if="address.id!=default_address_id" @click="set_default(index)">设为默认</a>
+                        <a @click="show_edit(index)">编辑</a>
+                    </div>
+                </div>
+        </div>
+    </div>
+
+    <div class="pop_con" v-show="is_show_edit">
+        <div class="site_con site_pop">
+                <div class="site_pop_title">
+                    <h3 v-if="editing_address_index">编辑收货地址</h3>
+                    <h3 v-else>新增收货地址</h3>
+                    <a @click="is_show_edit=false">×</a>
+                </div>
+                <form>
+                    <div class="form_group">
+                        <label>*收货人：</label>
+                        <input v-model="form_address.receiver" @blur="check_receiver" type="text" name="">
+                        <span v-show="error_receiver" class="error_tip">请填写收件人</span>
+                    </div>
+                    <div class="form_group">
+                        <label>*所在地区：</label>
+                        <select v-model="form_address.province_id">
+                            <option v-for="province in provinces" :value="province.id">{{ province.name }}</option>
+                        </select>
+                        <select v-model="form_address.city_id">
+                            <option v-for="city in cities" :value="city.id">{{ city.name }}</option>
+                        </select>
+                        <select v-model="form_address.district_id">
+                            <option v-for="district in districts" :value="district.id">{{ district.name }}</option>
+                        </select>
+                    </div>
+                    <div class="form_group">
+                        <label>*详细地址：</label>
+                        <input v-model="form_address.place" @blur="check_place" type="text" name="">
+                        <span v-show="error_place" class="error_tip">请填写地址信息</span>
+                    </div>
+                    <div class="form_group">
+                        <label>*手机：</label>
+                        <input v-model="form_address.mobile" @blur="check_mobile" type="text" name="">
+                        <span v-show="error_mobile" class="error_tip">手机信息有误</span>
+                    </div>
+                    <div class="form_group">
+                        <label>固定电话：</label>
+                        <input v-model="form_address.tel" type="text" name="">
+                    </div>
+                    <div class="form_group">
+                        <label>邮箱：</label>
+                        <input v-model="form_address.email" @blur="check_email" type="text" name="">
+                        <span v-show="error_email" class="error_tip">邮箱信息有误</span>
+                    </div>
+                    <input @click="save_address" type="button" name="" value="保 存" class="info_submit">
+                    <input @click="is_show_edit=false" type="reset" name="" value="取 消" class="info_submit info_reset">
+                </form>
+
+        </div>
+        <div class="mask"></div>
+    </div>
+    </div>
+
+<script type="text/javascript" src="http://127.0.0.1:8080/js/index.js"></script>
+    <script type="text/javascript" src="js/user_center_site.js"></script>
+
+
+</body>
+</html>

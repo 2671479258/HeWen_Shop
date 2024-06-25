@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <script type="text/javascript" src="js/vue-2.5.16.js"></script>
+    <script type="text/javascript" src="js/axios-0.18.0.min.js"></script>
+     <link rel="stylesheet" href="css/style.css">
+
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+<head>
+<style>
+    body {
+        font-family: 'Microsoft YaHei', Arial, sans-serif; /* 设置为微软雅黑，如果用户设备不支持，则使用Arial或系统默认的sans-serif字体 */
+    }
+ table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+     th, td {
+        padding: 10px;
+        text-align: center;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f2f2f2;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+a {
+    text-decoration: none; /* 去掉下划线 */
+    color: inherit; /* 继承父元素的颜色，如果有的话 */
+}
+
+a:hover {
+    color: red; /* 悬停时链接颜色变为灰色 */
+}
+.btn {
+        background-color: red;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: background-color 0.3s ease; /* 添加背景色渐变效果 */
+    }
+
+    /* 保留您提供的样式 */
+    .product-cell {
+        display: flex;
+        align-items: center;
+    }
+
+    /* 保留您提供的样式 */
+    .product-name {
+        width: 220px; /* 调整文字宽度 */
+    }
+
+    /* 保留您提供的样式 */
+    .product-image {
+        margin-left: 20px; /* 调整图像与文字之间的距离 */
+    }
+
+    /* 添加按钮悬停时的背景色渐变效果 */
+    .btn:hover {
+        background-color: darkred;
+    }
+
+    /* 添加文字悬停时的颜色变化 */
+     .received {
+        color: #ff4d4f;
+        font-weight: bold;
+
+        font-size:25px;
+    }
+
+    /* 添加文字悬停时的颜色变化 */
+    .received:hover {
+        color: #ff7875;
+
+    }
+</style>
+</head>
+    <body>
+<div class="header_con">
+
+   <div class="header">
+
+      <div class="welcome fl" style="color: rgba(255,255,255,0.6)">
+          <span><a href="#">首页</a></span>&nbsp|&nbsp
+          <span><a href="#">消费者业务网站</a></span>&nbsp|&nbsp
+          <span><a href="#">V码(优购码)</a></span>&nbsp|&nbsp
+          <span><a href="#">企业商用</a></span>&nbsp|&nbsp
+          <span><a href="#">Select Region</a></span>&nbsp|&nbsp
+      </div>
+
+      <div id='app' class="fr">
+         <div v-if="mobile" class="login_btn fl" style="color: #8ad504">
+            欢迎您：<em>[[ mobile ]]</em>
+            <a @click="logoutfunc" class="quit" style="margin-left: 25px">退出</a>
+         </div>
+
+         <div v-else class="login_btn fl">
+            <a href="/login.html">请登录</a>
+            <span>|</span>
+            <a href="register.html">注册</a>
+         </div>
+
+         <div class="user_link fl">
+            <span>|</span>
+            <a href="/user_center_info.html">我的订单</a>
+            <span>|</span>
+            <a href="/cart.html">客服</a>
+            <span>|</span>
+            <a href="/address.html">收货地址</a>
+             <span>|</span>
+            <a href="/carts.html">
+    <img src="images/cart.png" alt="购物车" width="15px" height="15px">
+    我的购物车
+</a>
+         </div>
+
+
+      </div>
+   </div>
+</div>
+<div class="content">
+    <div style="height: 100px; background-color: white; display: flex; flex-direction: row;">
+        <div style="margin-left: 150px;">
+            <a href="index.html">            <img src="images/logo.png" width="280px" height="100px"></a>
+        </div>
+        <div class='head_menu' style="display: flex; flex-direction: row; margin-top: 35px; margin-left: 60px;">
+            <div style="font-size: 21px;"><a href="#">盒温</a></div>
+            <div style="font-size: 21px; margin-left: 20px;"><a href="#">盒温智行</a></div>
+            <div style="font-size: 21px; margin-left: 20px;"><a href="#">盒温智选</a></div>
+            <div style="font-size: 21px; margin-left: 20px;"><a href="#">生态周边</a></div>
+        </div>
+    </div>
+</div>
+
+
+<div style="background-color: white;width: 1000px;margin-left: 240px;margin-top: 50px;height: auto;display: flex;flex-direction: column">
+<div style="font-size: 24px;margin-left: 90px;margin-top: 50px">我的订单</div>
+<div id="app6" style="width: 800px; margin-left: 90px; margin-top: 45px">
+   <div v-for="order in Orders" :key="order.order_id" style="border: 1px solid #ccc; padding: 15px; margin-bottom: 20px;">
+    <h2 style="font-weight: bold;margin-top: 25px">订单号：{{ order.order_id }}</h2>
+
+    <h2 style="margin-top: 15px">收货地址：{{ order.province }}&nbsp;&nbsp;{{ order.city }}&nbsp;&nbsp;
+        {{ order.district }}&nbsp;&nbsp;{{ order.address }}</h2>
+
+    <div style="margin-top: 15px;">
+        <span>订单状态：</span>
+        <span v-if="order.status === '已完成'" class="received">已收货</span>
+        <button v-else class="btn" @click="confirmDelivery(order.order_id)">确认收货</button>
+    </div>
+
+    <table style="margin-top: 15px">
+        <thead>
+            <tr>
+                <th>商品</th>
+                <th>单价/元</th>
+                <th>数量</th>
+                <th>状态</th>
+                <th>实付款/元</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="good in order.goods" :key="good.sku_id">
+                <td class="product-cell">
+                    <span class="product-name">{{ good.name }}</span>
+                    <img class="product-image" :src="good.url" alt="商品图片" width="100px" height="100px">
+                </td>
+                <td>{{ good.price }}</td>
+                <td>{{ good.count }}</td>
+                <td>{{ order.status }}</td>
+                <td>{{ order.total_amount }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <br>
+</div>
+</div>
+</div>
+
+<script type="text/javascript" src="js/myorder.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+</body>
+</html>

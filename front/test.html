@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+        <script type="text/javascript" src="js/vue-2.5.16.js"></script>
+    <script type="text/javascript" src="js/axios-0.18.0.min.js"></script>
+     <link rel="stylesheet" href="css/style.css">
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+<head>
+</head>
+        <body>
+<div id="app2">
+<div class="pagenation" >
+
+                <a v-show="previous" @click="on_page(previous)">上一页</a>
+                <a v-for="num in count" @click="on_page(num)" :class="num==page?'active':''">[[num]]</a>
+                <a v-show="next" @click="on_page(next)">下一页></a>
+            </div>
+</div>
+<script type="text/javascript" src="js/list.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+</body>
+</html>

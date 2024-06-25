@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <script type="text/javascript" src="js/vue-2.5.16.js"></script>
+    <script type="text/javascript" src="js/axios-0.18.0.min.js"></script>
+     <link rel="stylesheet" href="css/style.css">
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+<head>
+<style>
+.goods_item {
+    float: left;
+    margin-right: 20px;
+    list-style: none; /* 移除列表项的默认样式 */
+}
+.goods_container {
+    margin-top: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 水平居中 */
+    justify-content: center; /* 垂直居中 */
+    background-color: #ffffff; /* 白色背景 */
+    border-radius: 5px; /* 圆角边框 */
+    padding: 10px; /* 内边距 */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+    transition: box-shadow 0.3s ease; /* 添加过渡效果 */
+    width: 265px;
+    text-align: center; /* 文字水平居中 */
+}
+
+.goods_container img {
+    margin: auto; /* 图片水平和垂直居中 */
+}
+
+.goods_item:hover .goods_container {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* 鼠标悬停时增加阴影 */
+
+
+}
+.breadcrumb{
+    margin-left: 160px;
+    margin-top: 20px;
+    font-size: 13px;
+}
+a {
+    text-decoration: none; /* 去掉下划线 */
+    color: inherit; /* 继承父元素的颜色，如果有的话 */
+}
+
+a:hover {
+    color: red; /* 悬停时链接颜色变为灰色 */
+}
+
+.goods_num{height:52px;margin-top:59px;margin-left: 44px}
+.goods_num .num_name{width:70px;height:52px;line-height:52px;}
+.goods_num .num_add{width:75px;height:50px;border:1px solid #dddddd}
+.goods_num .num_add input{width:49px;height:50px;text-align:center;line-height:50px;border:0px;outline:none;font-size:14px;color:#666}
+.goods_num .num_add .add,.goods_num .num_add .minus{width:25px;line-height:25px;text-align:center;border-left:1px solid #ddd;border-bottom:1px solid #ddd;color:#666;font-size:14px}
+.goods_num .num_add .minus{border-bottom:0px}
+</style>
+</head>
+    <body style="background-color: white">
+<div class="header_con">
+
+   <div class="header">
+
+      <div class="welcome fl" style="color: rgba(255,255,255,0.6)">
+          <span><a href="#">首页</a></span>&nbsp|&nbsp
+          <span><a href="#">消费者业务网站</a></span>&nbsp|&nbsp
+          <span><a href="#">V码(优购码)</a></span>&nbsp|&nbsp
+          <span><a href="#">企业商用</a></span>&nbsp|&nbsp
+          <span><a href="#">Select Region</a></span>&nbsp|&nbsp
+      </div>
+
+      <div id='app' class="fr">
+         <div v-if="mobile" class="login_btn fl" style="color: #8ad504">
+            欢迎您：<em>{{ mobile }}</em>
+            <a @click="logoutfunc" class="quit" style="margin-left: 25px">退出</a>
+         </div>
+
+         <div v-else class="login_btn fl">
+            <a href="/login.html">请登录</a>
+            <span>|</span>
+            <a href="register.html">注册</a>
+         </div>
+
+         <div class="user_link fl">
+            <span>|</span>
+            <a href="/user_center_info.html">我的订单</a>
+            <span>|</span>
+            <a href="/cart.html">客服</a>
+            <span>|</span>
+            <a href="/user_center_order.html">网址导航</a>
+         </div>
+
+
+      </div>
+   </div>
+</div>
+<div class="content">
+    <div style="height: 100px; background-color: white; display: flex; flex-direction: row;">
+        <div style="margin-left: 150px;">
+            <a href="index.html"><img src="images/logo_app.png" width="140px" height="100px"></a>
+        </div>
+        <div class='head_menu' style="display: flex; flex-direction: row; margin-top: 35px; margin-left: 60px;">
+            <div style="font-size: 21px;"><a href="#">华为</a></div>
+            <div style="font-size: 21px; margin-left: 20px;"><a href="#">鸿蒙智行</a></div>
+            <div style="font-size: 21px; margin-left: 20px;"><a href="#">华为智选</a></div>
+            <div style="font-size: 21px; margin-left: 20px;"><a href="#">生态周边</a></div>
+        </div>
+    </div>
+</div>
+<div id="app3" style="display: flex;flex-direction: row">
+    <div style="width: 600px;height: 900px;margin-left: 150px">
+        <div style="margin-left: 35px"><img src="images/goods/1.png" width="540px" height="570px"> </div>
+    </div>
+    <div style="width: 550px;height: 900px;margin-left: 50px;display: flex;flex-direction: column">
+        <div style="font-size: 24px;margin-left: 40px;margin-top: 25px">HUAWEI Mate 60 Pro 12GB+512GB 白沙银</div>
+        <div style="font-size: 15px;margin-left: 40px;margin-top: 25px;color: #787878">卫星通话，超可靠玄武架构，全焦段超清影像</div>
+         <div class="goods_num clearfix">
+                <div class="num_name fl">数 量：</div>
+                <div class="num_add fl">
+                    <input v-model="sku_count" type="text" class="num_show fl">
+                    <a @click="sku_count++" class="add fr">+</a>
+                    <a @click="on_minus()" class="minus fr">-</a>
+                </div>
+            </div>
+
+            <div style="margin-left: 44px">总价：<em>[[sku_amount]]元</em></div>
+            <div style="margin-left: 44px">
+                <a @click="add_cart" class="add_cart" id="add_cart">加入购物车</a>
+            </div>
+
+    </div>
+
+
+</div>
+<script type="text/javascript">
+        var price = 9.90;
+        var cat = 2;
+    </script>
+
+
+<script type="text/javascript" src="js/index.js"></script>
+ <script type="text/javascript" src="http://127.0.0.1:8080/js/detail.js"></script>
+</body>
+</html>

@@ -1,0 +1,194 @@
+
+ /* 顶部样式 */
+.header_con{
+	background-color:black;
+	height:29px;
+	border-bottom:1px solid #dddddd
+}
+
+.header{
+	width:1200px;
+	height:29px;
+	margin:0 auto;
+}
+
+.welcome,.login_info,.login_btn,.user_link{
+	line-height:29px;
+}
+
+.login_info{
+	display:none;
+}
+
+.login_info em{color:#ff8800}
+
+.login_info .quit{
+	color:#666;
+	padding-left:10px;
+}
+
+.login_info .quit:hover{
+	color:#ff8800;
+}
+
+.login_btn a,.user_link a{
+	color:rgba(255,255,255,0.6);
+}
+
+.login_btn a:hover,.user_link a:hover{
+	color:#ff8800;
+}
+
+.login_btn span,.user_link span{
+	color:#cecece;
+	margin:0 10px;
+}
+/* 把标签默认的间距设为0 */
+body,ul,ol,p,h1,h2,h3,h4,h5,h6,dl,dd,select,input,textarea,form{margin:0;padding:0}
+
+/* 让h标签文字大小继承body的文字设置 */
+h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}
+
+/* 去掉列表默认的图标 */
+ul,ol{list-style:none;}
+
+/* 去掉em默认的斜体 */
+em{font-style: normal;}
+
+.header a {
+    text-decoration: none; /* 去掉下划线 */
+    color: rgb(133, 133, 133); /* 继承父元素的颜色，如果有的话 */
+}
+
+.header a:hover {
+    color: white 
+}
+
+
+/* 去掉加链接时产生的框线 */
+img{border:0;}
+
+
+
+/* 浮动 */
+.fl{float:left}
+.fr{float:right}
+
+
+
+ .sub_menu_con{width:200px;height:30px;position:relative;}
+
+.sub_menu_con .sub_menu{
+	left:0px;
+	top:30px;
+	margin-left:0px;
+	background:rgba(0,0,0,0.6);
+	z-index:1000;
+	display:none;
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.3);
+}
+.sub_menu_con:hover .sub_menu{
+	display:block;
+}
+
+
+.sub_menu{width:170px;height:480px;background:#fff;border:2px;position:absolute;left:50%;top:0px;margin-left:-611px;padding:10px 15px;margin-top: 170px}
+
+.sub_menu li{
+	height:30px;
+}
+
+.sub_menu li:hover{
+	background:#fff;
+	margin:0px -15px;
+	padding:0 15px;
+	cursor: pointer;
+}
+.sub_menu li:hover .level1 a{
+	color:#333;
+    color: inherit; /* 继承父元素的颜色，如果有的话 */
+}
+.sub_menu .level1 a{
+	line-height:30px;
+	color:rgb(89, 77, 77);
+	font-size:17px;
+	margin-right:10px;
+        text-decoration: none; /* 去掉下划线 */
+
+}
+.sub_menu li:hover .level1 a:hover{
+	color:red;
+}
+.sub_menu li .level2{
+	background:#fff;
+	width:610px;
+	height:320px;
+	padding:15px;
+	position:absolute;
+	left:200px;
+	top:0px;
+	display:none;
+}
+.sub_menu li:hover .level2{
+	display:block;
+}
+.sub_menu li:hover .level2 a{
+	display:block;
+     text-decoration: none; /* 去掉下划线 */
+}
+
+.list_group{
+	overflow:hidden;
+}
+.group_name{
+	width:80px;
+	text-align:right;
+	font-size:14px;
+	line-height:24px;
+	font-weight:bold;
+	padding-right:20px;
+}
+.group_detail{
+	width:630px;
+	padding-bottom:5px;
+	border-bottom:1px dotted #999;
+	margin-bottom:8px;
+}
+.group_detail a{
+	font-size:14px;
+	color:#666;
+	line-height:24px;
+	margin-right:15px;
+}
+.group_detail a:hover{
+	color:#f00;
+}
+
+       body {
+
+background-color: rgb(241, 243, 245);
+}
+
+
+       .gg {
+
+    transition: box-shadow 0.3s ease; /* 添加过渡效果 */
+  }
+
+  .gg:hover {
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.3); /* 鼠标悬停时添加阴影 */
+  }
+  .shop1 a{
+       text-decoration: none; /* 去掉下划线 */
+      color: inherit; /* 继承父元素的颜色，如果有的话 */
+  }
+    .head_menu a{
+              text-decoration: none; /* 去掉下划线 */
+      color: black; /* 继承父元素的颜色，如果有的话 */
+
+    }
+    .head_menu a:hover{
+           color: red;
+
+    }
+

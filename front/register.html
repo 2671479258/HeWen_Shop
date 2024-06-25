@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <script type="text/javascript" src="js/vue-2.5.16.js"></script>
+    <script type="text/javascript" src="js/axios-0.18.0.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<head>
+    <style>
+    .custom-input {
+
+        border: 2px solid #ccc; /* 默认边框颜色 */
+        border-radius: 10px; /* 圆角 */
+        padding: 5px 10px; /* 内边距 */
+        width: 320px;
+        height: 30px;
+        background-color: #f1f1f1;
+    }
+
+    .custom-input:focus {
+        border-color: #007bff; /* 输入时边框颜色 */
+        outline: none; /* 移除默认的聚焦样式 */
+    }
+
+    .sb-input{
+
+        background-color: red;
+        width: 270px;
+color: white;
+padding: 10px 20px;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+        margin-left: 30px;
+    }
+      a {
+    text-decoration: none; /* 去掉下划线 */
+    color: #2f69ff /* 继承父元素的颜色，如果有的话 */
+}
+
+a:hover {
+    color: dodgerblue; /* 悬停时链接颜色变为灰色 */
+}
+
+</style>
+</head>
+    <body>
+
+
+
+
+<div style="height: 50px;background-color: #f1f1f1;display: flex;flex-direction: row">
+    <div style="font-weight: bold;margin-left: 250px;margin-top: 15px">盒温商城</div>
+</div>
+
+<div id='app' style="width: 500px;height: 500px;margin-top: 70px;margin-left: 500px;display: flex;flex-direction: column">
+    <div style="font-size: 29px;margin-left: 150px;margin-top: 25px;font-weight: bold">盒温账号注册</div>
+    <div style="font-size: 17px;margin-left: 170px;margin-top: 10px;display: flex;flex-direction: row">
+        <div>已有账号,</div>
+         <div style="margin-left: 5px"><a href="login.html">去登录></a></div>
+    </div>
+
+<form method="post" @submit.prevent="on_submit">
+    <div style="font-size: 17px;margin-left: 70px;margin-top: 10px;">
+    <input type="text" v-model="mobile" placeholder="请输入手机号" name="mobile" class="custom-input">
+    </div>
+
+
+    <div style="font-size: 17px;margin-left: 70px;margin-top: 30px;">
+    <input type="text" v-model="username" placeholder="请输入用户名" name="mobile" class="custom-input">
+    </div>
+
+    <div style="font-size: 17px;margin-left: 70px;margin-top: 30px;">
+    <input type="password" v-model="password" placeholder="请输入密码" name="password" class="custom-input">
+    </div>
+
+    <div style="font-size: 17px;margin-left: 70px;margin-top: 30px;">
+    <input type="password" v-model="password2" placeholder="请二次输入密码确认" name="password2" class="custom-input">
+    </div>
+
+    <div style="font-size: 17px;margin-left: 70px;margin-top: 30px;">
+    <input type="submit" class="sb-input" value="注册">
+    </div>
+</form>
+
+</div>
+
+    <script type="text/javascript" src="js/register.js"></script>
+
+</body>
+</html>

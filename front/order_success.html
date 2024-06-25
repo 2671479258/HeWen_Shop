@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <script type="text/javascript" src="js/vue-2.5.16.js"></script>
+    <script type="text/javascript" src="js/axios-0.18.0.min.js"></script>
+     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/main.css">
+     <link rel="stylesheet" href="css/reset.css">
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+<head>
+<style>
+.goods_item {
+    float: left;
+    margin-right: 20px;
+    list-style: none; /* 移除列表项的默认样式 */
+}
+.goods_container {
+    margin-top: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 水平居中 */
+    justify-content: center; /* 垂直居中 */
+    background-color: #ffffff; /* 白色背景 */
+    border-radius: 5px; /* 圆角边框 */
+    padding: 10px; /* 内边距 */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+    transition: box-shadow 0.3s ease; /* 添加过渡效果 */
+    width: 265px;
+    text-align: center; /* 文字水平居中 */
+}
+
+.goods_container img {
+    margin: auto; /* 图片水平和垂直居中 */
+}
+
+.goods_item:hover .goods_container {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* 鼠标悬停时增加阴影 */
+
+
+}
+.breadcrumb{
+    margin-left: 160px;
+    margin-top: 20px;
+    font-size: 13px;
+}
+a {
+    text-decoration: none; /* 去掉下划线 */
+    color: inherit; /* 继承父元素的颜色，如果有的话 */
+}
+
+a:hover {
+    color: red; /* 悬停时链接颜色变为灰色 */
+}
+</style>
+</head>
+    <body>
+<div class="header_con">
+
+   <div class="header">
+
+      <div class="welcome fl" style="color: rgba(255,255,255,0.6)">
+          <span><a href="#">首页</a></span>&nbsp|&nbsp
+          <span><a href="#">消费者业务网站</a></span>&nbsp|&nbsp
+          <span><a href="#">V码(优购码)</a></span>&nbsp|&nbsp
+          <span><a href="#">企业商用</a></span>&nbsp|&nbsp
+          <span><a href="#">Select Region</a></span>&nbsp|&nbsp
+      </div>
+
+      <div id='app' class="fr">
+         <div v-if="mobile" class="login_btn fl" style="color: #8ad504">
+            欢迎您：<em>[[ mobile ]]</em>
+            <a @click="logoutfunc" class="quit" style="margin-left: 25px">退出</a>
+         </div>
+
+         <div v-else class="login_btn fl">
+            <a href="/login.html">请登录</a>
+            <span>|</span>
+            <a href="register.html">注册</a>
+         </div>
+
+         <div class="user_link fl">
+            <span>|</span>
+            <a href="/user_center_info.html">我的订单</a>
+            <span>|</span>
+            <a href="/cart.html">客服</a>
+            <span>|</span>
+            <a href="/user_center_order.html">网址导航</a>
+             <span>|</span>
+            <a href="/carts.html">
+    <img src="images/cart.png" alt="购物车" width="15px" height="15px">
+    我的购物车
+</a>
+         </div>
+
+
+      </div>
+   </div>
+</div>
+<div class="content">
+    <div style="height: 100px; background-color: white; display: flex; flex-direction: row;">
+        <div style="margin-left: 150px;">
+            <a href="index.html"><img src="images/logo_app.png" width="140px" height="100px"></a>
+        </div>
+        <div class='head_menu' style="display: flex; flex-direction: row; margin-top: 35px; margin-left: 60px;">
+            <div style="font-size: 21px;"><a href="#">华为</a></div>
+            <div style="font-size: 21px; margin-left: 20px;"><a href="#">鸿蒙智行</a></div>
+            <div style="font-size: 21px; margin-left: 20px;"><a href="#">华为智选</a></div>
+            <div style="font-size: 21px; margin-left: 20px;"><a href="#">生态周边</a></div>
+        </div>
+    </div>
+</div>
+<div id="app9">
+
+
+    <div class="common_list_con clearfix">
+        <div class="order_success">
+            <p><b>订单提交成功，订单总价<em>¥[[amount]]</em></b></p>
+            <p>您的订单已成功生成，选择您想要的支付方式，订单号：[[order_id]]</p>
+            <p><a href="/user_center_order.html">您可以在用户中心中我的订单中查看该订单</a></p>
+        </div>
+    </div>
+
+    <div class="order_submit clearfix">
+        <a @click="next_operate">[[ operate ]]</a>
+    </div>
+
+</div>
+
+
+
+    <script type="text/javascript" src="js/order_success.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+</body>
+</html>

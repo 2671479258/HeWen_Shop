@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+            <script type="text/javascript" src="js/vue-2.5.16.js"></script>
+    <script type="text/javascript" src="js/axios-0.18.0.min.js"></script>
+        <link rel="stylesheet" href="css/style.css">
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+        font-family: 'Microsoft YaHei', Arial, sans-serif; /* 设置为微软雅黑，如果用户设备不支持，则使用Arial或系统默认的sans-serif字体 */
+    }
+    </style>
+
+</head>
+<body>
+
+
+<div class="header_con">
+
+   <div class="header">
+
+      <div class="welcome fl" style="color: rgba(255,255,255,0.6)">
+          <span><a href="#">首页</a></span>&nbsp|&nbsp
+          <span><a href="#">消费者业务网站</a></span>&nbsp|&nbsp
+          <span><a href="#">V码(优购码)</a></span>&nbsp|&nbsp
+          <span><a href="#">企业商用</a></span>&nbsp|&nbsp
+          <span><a href="#">Select Region</a></span>&nbsp|&nbsp
+      </div>
+
+      <div id='app' class="fr">
+         <div v-if="mobile" class="login_btn fl" style="color: #8ad504">
+            欢迎您：<em>[[ mobile ]]</em>
+            <a @click="logoutfunc" class="quit" style="margin-left: 25px">退出</a>
+         </div>
+
+         <div v-else class="login_btn fl">
+            <a href="/login.html">请登录</a>
+            <span>|</span>
+            <a href="register.html">注册</a>
+         </div>
+
+         <div class="user_link fl">
+            <span>|</span>
+            <a href="/my_order.html">我的订单</a>
+            <span>|</span>
+            <a href="/cart.html">客服</a>
+            <span>|</span>
+            <a href="/address.html">收货地址</a>
+             <span>|</span>
+            <a href="/carts.html">
+    <img src="images/cart.png" alt="购物车" width="15px" height="15px">
+    我的购物车
+</a>
+         </div>
+
+
+      </div>
+   </div>
+</div>
+
+
+<div class="content">
+    <div style="height: 100px; background-color: white; display: flex; flex-direction: row;">
+        <div style="margin-left: 100px;">
+            <img src="images/logo.png" width="280px" height="100px">
+        </div>
+        <div class='head_menu' style="display: flex; flex-direction: row; margin-top: 35px; margin-left: 60px;">
+            <div style="font-size: 21px;"><a href="#">盒温</a></div>
+            <div style="font-size: 21px; margin-left: 20px;"><a href="#">盒温智行</a></div>
+            <div style="font-size: 21px; margin-left: 20px;"><a href="#">盒温智选</a></div>
+            <div style="font-size: 21px; margin-left: 20px;"><a href="#">生态周边</a></div>
+        </div>
+    </div>
+
+    <div style="height: 559px; display: flex; flex-direction: row;">
+        <div>
+            <ul class="sub_menu">
+                <li>
+                    <div class="level1">
+                        <a href="#" style="padding-right: 100px;">手机</a>>
+                    </div>
+                    <div class="level2">
+                        <div class="list_group">
+                            <div class="group_detail fl" style="display:flex;flex-direction: column">
+                                <div style="display: flex;flex-direction: row;margin-left: 20px">
+
+                                    <div style="display: flex;flex-direction: row;width: 239px">
+                                    <div><img src="images/p1.png"  height="70px"></div>
+                                        <div style="margin-top:21px;margin-left: 5px"><a href="http://127.0.0.1:8080/list.html?cat=2">Meta系列</a></div>
+                                    </div>
+
+                                    <div style="display: flex;flex-direction: row;margin-left: 90px;width: 239px">
+                                    <div><img src="images/p2.png" height="70px"></div>
+                                        <div style="margin-top:21px;margin-left: 5px"><a href="#">盒温官方翻新</a></div>
+                                    </div>
+
+                                </div>
+                                <div style="display: flex;flex-direction: row;margin-left: 20px">
+
+                                    <div style="display: flex;flex-direction: row;width: 239px">
+                                    <div><img src="images/p3.png"  height="70px"></div>
+                                        <div style="margin-top:21px;margin-left: 5px"><a href="http://127.0.0.1:8080/list.html?cat=3">Pura系列</a></div>
+                                    </div>
+
+                                    <div style="display: flex;flex-direction: row;margin-left: 90px;width: 239px">
+                                    <div><img src="images/p4.png" height="70px"></div>
+                                        <div style="margin-top:21px;margin-left: 5px"><a href="#">智选手机</a></div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list_group">
+
+                        </div>
+                    </div>
+                </li>
+                 <li style="margin-top: 5px">
+                    <div class="level1">
+                        <a href="#" style="padding-right: 100px;">穿戴</a>>
+                    </div>
+                    <div class="level2">
+                        <div class="list_group">
+                            <div class="group_detail fl" style="display:flex;flex-direction: column">
+                                <div style="display: flex;flex-direction: row;margin-left: 20px">
+
+                                    <div style="display: flex;flex-direction: row;width: 239px">
+                                    <div><img src="images/p10.png"  height="70px"></div>
+                                        <a href=""><div style="margin-top:21px;margin-left: 5px"><a href="http://127.0.0.1:8080/list.html?cat=5">WATCH Ultimate系列</a></div></a>
+                                    </div>
+
+                                    <div style="display: flex;flex-direction: row;margin-left: 90px;width: 239px">
+                                    <div><img src="images/p11.png" height="70px"></div>
+                                        <div style="margin-top:21px;margin-left: 5px"><a href="#">智能观影眼镜</a></div>
+                                    </div>
+
+                                </div>
+                                <div style="display: flex;flex-direction: row;margin-left: 20px">
+
+                                    <div style="display: flex;flex-direction: row;width: 239px">
+                                    <div><img src="images/p12.png"  height="70px"></div>
+                                        <div style="margin-top:21px;margin-left: 18px"><a href="#">WATCH系列</a></div>
+                                    </div>
+
+                                    <div style="display: flex;flex-direction: row;margin-left: 90px;width: 239px">
+                                    <div><img src="images/p13.png" height="70px"></div>
+                                        <div style="margin-top:21px;margin-left: 5px"><a href="#">配件周边</a></div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list_group">
+
+                        </div>
+                    </div>
+                </li>
+                <li style="margin-top: 5px">
+                    <div class="level1">
+                        <a href="#" style="padding-right: 100px;">平板</a>>
+                    </div>
+                    <div class="level2">
+                        <div class="list_group">
+                            <div class="group_detail fl" style="display:flex;flex-direction: column">
+                                <div style="display: flex;flex-direction: row;margin-left: 20px">
+
+                                    <div style="display: flex;flex-direction: row;width: 180px">
+                                    <div><img src="images/p14.png"  height="70px"></div>
+                                        <div style="margin-top:21px;margin-left: 5px"><a href="#">MatePad Pro 系列</a></div>
+                                    </div>
+
+                                    <div style="display: flex;flex-direction: row;margin-left: 90px;width: 180px">
+                                    <div><img src="images/p15.png" height="70px"></div>
+                                        <div style="margin-top:21px;margin-left: 5px"><a href="#">配件周边</a></div>
+                                    </div>
+
+                                </div>
+                                <div style="display: flex;flex-direction: row;margin-left: 20px">
+
+                                    <div style="display: flex;flex-direction: row;width: 180px">
+                                    <div><img src="images/p12.png"  height="70px"></div>
+                                        <div style="margin-top:21px;margin-left: 5px"><a href="#">配件周边</a></div>
+                                    </div>
+
+                                    <div style="display: flex;flex-direction: row;margin-left: 90px;width: 180px">
+                                    <div><img src="images/p13.png" height="70px"></div>
+                                        <div style="margin-top:21px;margin-left: 5px"><a href="#">配件周边</a></div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list_group">
+
+                        </div>
+                    </div>
+                </li>
+                <li style="margin-top: 5px">
+                    <div class="level1">
+                        <a href="#" style="padding-right: 100px;">电脑</a>>
+                    </div>
+                    <div class="level2">
+                        <div class="list_group">
+                            <div class="group_detail fl" style="display:flex;flex-direction: column">
+                                <div style="display: flex;flex-direction: row;margin-left: 20px">
+
+                                    <div style="display: flex;flex-direction: row;width: 180px">
+                                    <div><img src="images/p10.png"  height="70px"></div>
+                                        <div style="margin-top:21px;margin-left: 5px">WATCH Ultimate系列</div>
+                                    </div>
+
+                                    <div style="display: flex;flex-direction: row;margin-left: 90px;width: 180px">
+                                    <div><img src="images/p11.png" height="70px"></div>
+                                        <div style="margin-top:21px;margin-left: 5px">智能观影眼镜</div>
+                                    </div>
+
+                                </div>
+                                <div style="display: flex;flex-direction: row;margin-left: 20px">
+
+                                    <div style="display: flex;flex-direction: row;width: 180px">
+<div><img src="images/p12.png"  height="70px"></div>
+    <div style="margin-top:21px;margin-left: 5px"><a href="#">WATCH系列</a></div>
+</div>
+
+                                    <div style="display: flex;flex-direction: row;margin-left: 90px;width: 180px">
+                                    <div><img src="images/p13.png" height="70px"></div>
+                                        <div style="margin-top:21px;margin-left: 5px">配件周边</div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list_group">
+
+                        </div>
+                    </div>
+                </li>
+                <li style="margin-top: 5px">
+                    <div class="level1">
+                        <a href="#" style="padding-right: 100px;">耳机</a>>
+                    </div>
+                    <div class="level2">
+                        <div class="list_group">
+                            <div class="group_detail fl" style="display:flex;flex-direction: column">
+                                <div style="display: flex;flex-direction: row;margin-left: 20px">
+
+                                    <div style="display: flex;flex-direction: row;width: 180px">
+                                    <div><img src="images/p10.png"  height="70px"></div>
+                                        <div style="margin-top:21px;margin-left: 5px">WATCH Ultimate系列</div>
+                                    </div>
+
+                                    <div style="display: flex;flex-direction: row;margin-left: 90px;width: 180px">
+                                    <div><img src="images/p11.png" height="70px"></div>
+                                        <div style="margin-top:21px;margin-left: 5px">智能观影眼镜</div>
+                                    </div>
+
+                                </div>
+                                <div style="display: flex;flex-direction: row;margin-left: 20px">
+
+                                    <div style="display: flex;flex-direction: row;width: 180px">
+<div><img src="images/p12.png"  height="70px"></div>
+    <div style="margin-top:21px;margin-left: 5px"><a href="#">WATCH系列</a></div>
+</div>
+
+                                    <div style="display: flex;flex-direction: row;margin-left: 90px;width: 180px">
+                                    <div><img src="images/p13.png" height="70px"></div>
+                                        <div style="margin-top:21px;margin-left: 5px">配件周边</div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list_group">
+
+                        </div>
+                    </div>
+                </li>
+                <li style="margin-top: 5px">
+                    <div class="level1">
+                        <a href="#" style="padding-right: 100px;">屏幕</a>>
+                    </div>
+                    <div class="level2">
+                        <div class="list_group">
+                            <div class="group_detail fl" style="display:flex;flex-direction: column">
+                                <div style="display: flex;flex-direction: row;margin-left: 20px">
+
+                                    <div style="display: flex;flex-direction: row;width: 180px">
+                                    <div><img src="images/p10.png"  height="70px"></div>
+                                        <div style="margin-top:21px;margin-left: 5px">WATCH Ultimate系列</div>
+                                    </div>
+
+                                    <div style="display: flex;flex-direction: row;margin-left: 90px;width: 180px">
+                                    <div><img src="images/p11.png" height="70px"></div>
+                                        <div style="margin-top:21px;margin-left: 5px">智能观影眼镜</div>
+                                    </div>
+
+                                </div>
+                                <div style="display: flex;flex-direction: row;margin-left: 20px">
+
+                                    <div style="display: flex;flex-direction: row;width: 180px">
+<div><img src="images/p12.png"  height="70px"></div>
+    <div style="margin-top:21px;margin-left: 5px"><a href="#">WATCH系列</a></div>
+</div>
+
+                                    <div style="display: flex;flex-direction: row;margin-left: 90px;width: 180px">
+                                    <div><img src="images/p13.png" height="70px"></div>
+                                        <div style="margin-top:21px;margin-left: 5px">配件周边</div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list_group">
+
+                        </div>
+                    </div>
+                </li>
+                <li style="margin-top: 5px">
+                    <div class="level1">
+                        <a href="#" style="padding-right: 100px;">家居</a>>
+                    </div>
+                    <div class="level2">
+                        <div class="list_group">
+                            <div class="group_detail fl" style="display:flex;flex-direction: column">
+                                <div style="display: flex;flex-direction: row;margin-left: 20px">
+
+                                    <div style="display: flex;flex-direction: row;width: 180px">
+                                    <div><img src="images/p10.png"  height="70px"></div>
+                                        <div style="margin-top:21px;margin-left: 5px">WATCH Ultimate系列</div>
+                                    </div>
+
+                                    <div style="display: flex;flex-direction: row;margin-left: 90px;width: 180px">
+                                    <div><img src="images/p11.png" height="70px"></div>
+                                        <div style="margin-top:21px;margin-left: 5px">智能观影眼镜</div>
+                                    </div>
+
+                                </div>
+                                <div style="display: flex;flex-direction: row;margin-left: 20px">
+
+                                    <div style="display: flex;flex-direction: row;width: 180px">
+<div><img src="images/p12.png"  height="70px"></div>
+    <div style="margin-top:21px;margin-left: 5px"><a href="#">WATCH系列</a></div>
+</div>
+
+                                    <div style="display: flex;flex-direction: row;margin-left: 90px;width: 180px">
+                                    <div><img src="images/p13.png" height="70px"></div>
+                                        <div style="margin-top:21px;margin-left: 5px">配件周边</div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list_group">
+
+                        </div>
+                    </div>
+                </li>
+                <li style="margin-top: 5px">
+                    <div class="level1">
+                        <a href="#" style="padding-right: 100px;">出行</a>>
+                    </div>
+                    <div class="level2">
+                        <div class="list_group">
+                            <div class="group_detail fl" style="display:flex;flex-direction: column">
+                                <div style="display: flex;flex-direction: row;margin-left: 20px">
+
+                                    <div style="display: flex;flex-direction: row;width: 180px">
+                                    <div><img src="images/p10.png"  height="70px"></div>
+                                        <div style="margin-top:21px;margin-left: 5px">WATCH Ultimate系列</div>
+                                    </div>
+
+                                    <div style="display: flex;flex-direction: row;margin-left: 90px;width: 180px">
+                                    <div><img src="images/p11.png" height="70px"></div>
+                                        <div style="margin-top:21px;margin-left: 5px">智能观影眼镜</div>
+                                    </div>
+
+                                </div>
+                                <div style="display: flex;flex-direction: row;margin-left: 20px">
+
+                                    <div style="display: flex;flex-direction: row;width: 180px">
+<div><img src="images/p12.png"  height="70px"></div>
+    <div style="margin-top:21px;margin-left: 5px"><a href="#">WATCH系列</a></div>
+</div>
+
+                                    <div style="display: flex;flex-direction: row;margin-left: 90px;width: 180px">
+                                    <div><img src="images/p13.png" height="70px"></div>
+                                        <div style="margin-top:21px;margin-left: 5px">配件周边</div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list_group">
+
+                        </div>
+                    </div>
+                </li>
+                <li style="margin-top: 5px">
+                    <div class="level1">
+                        <a href="#" style="padding-right: 100px;">配件</a>>
+                    </div>
+                    <div class="level2">
+                        <div class="list_group">
+                            <div class="group_detail fl" style="display:flex;flex-direction: column">
+                                <div style="display: flex;flex-direction: row;margin-left: 20px">
+
+                                    <div style="display: flex;flex-direction: row;width: 180px">
+                                    <div><img src="images/p10.png"  height="70px"></div>
+                                        <div style="margin-top:21px;margin-left: 5px">WATCH Ultimate系列</div>
+                                    </div>
+
+                                    <div style="display: flex;flex-direction: row;margin-left: 90px;width: 180px">
+                                    <div><img src="images/p11.png" height="70px"></div>
+                                        <div style="margin-top:21px;margin-left: 5px">智能观影眼镜</div>
+                                    </div>
+
+                                </div>
+                                <div style="display: flex;flex-direction: row;margin-left: 20px">
+
+                                    <div style="display: flex;flex-direction: row;width: 180px">
+                                    <div><img src="images/p12.png"  height="70px"></div>
+                                        <div style="margin-top:21px;margin-left: 5px">WATCH系列</div>
+                                    </div>
+
+                                    <div style="display: flex;flex-direction: row;margin-left: 90px;width: 180px">
+                                    <div><img src="images/p13.png" height="70px"></div>
+                                        <div style="margin-top:21px;margin-left: 5px">配件周边</div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list_group">
+
+                        </div>
+                    </div>
+                </li>
+                <li style="margin-top: 5px">
+                    <div class="level1">
+                        <a href="#" style="padding-right: 100px;">增值</a>>
+                    </div>
+                    <div class="level2">
+                        <div class="list_group">
+                            <div class="group_detail fl" style="display:flex;flex-direction: column">
+                                <div style="display: flex;flex-direction: row;margin-left: 20px">
+
+                                    <div style="display: flex;flex-direction: row;width: 180px">
+                                    <div><img src="images/p10.png"  height="70px"></div>
+                                        <div style="margin-top:21px;margin-left: 5px">WATCH Ultimate系列</div>
+                                    </div>
+
+                                    <div style="display: flex;flex-direction: row;margin-left: 90px;width: 180px">
+                                    <div><img src="images/p11.png" height="70px"></div>
+                                        <div style="margin-top:21px;margin-left: 5px">智能观影眼镜</div>
+                                    </div>
+
+                                </div>
+                                <div style="display: flex;flex-direction: row;margin-left: 20px">
+
+                                    <div style="display: flex;flex-direction: row;width: 180px">
+                                    <div><img src="images/p12.png"  height="70px"></div>
+                                        <div style="margin-top:21px;margin-left: 5px">WATCH系列</div>
+                                    </div>
+
+                                    <div style="display: flex;flex-direction: row;margin-left: 90px;width: 180px">
+                                    <div><img src="images/p13.png" height="70px"></div>
+                                        <div style="margin-top:21px;margin-left: 5px">配件周边</div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list_group">
+
+                        </div>
+                    </div>
+                </li>
+                <li style="margin-top: 5px">
+                    <div class="level1">
+                        <a href="#" style="padding-right: 100px;">终端</a>>
+                    </div>
+                    <div class="level2">
+                        <div class="list_group">
+                            <div class="group_detail fl" style="display:flex;flex-direction: column">
+                                <div style="display: flex;flex-direction: row;margin-left: 20px">
+
+                                    <div style="display: flex;flex-direction: row;width: 180px">
+                                    <div><img src="images/p10.png"  height="70px"></div>
+                                        <div style="margin-top:21px;margin-left: 5px">WATCH Ultimate系列</div>
+                                    </div>
+
+                                    <div style="display: flex;flex-direction: row;margin-left: 90px;width: 180px">
+                                    <div><img src="images/p11.png" height="70px"></div>
+                                        <div style="margin-top:21px;margin-left: 5px">智能观影眼镜</div>
+                                    </div>
+
+                                </div>
+                                <div style="display: flex;flex-direction: row;margin-left: 20px">
+
+                                    <div style="display: flex;flex-direction: row;width: 180px">
+                                    <div><img src="images/p12.png"  height="70px"></div>
+                                        <div style="margin-top:21px;margin-left: 5px">WATCH系列</div>
+                                    </div>
+
+                                    <div style="display: flex;flex-direction: row;margin-left: 90px;width: 180px">
+                                    <div><img src="images/p13.png" height="70px"></div>
+                                        <div style="margin-top:21px;margin-left: 5px">配件周边</div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list_group">
+
+                        </div>
+                    </div>
+                </li>
+                <li style="margin-top: 5px">
+                    <div class="level1">
+                        <a href="#" style="padding-right: 100px;">周边</a>>
+                    </div>
+                    <div class="level2">
+                        <div class="list_group">
+                            <div class="group_detail fl" style="display:flex;flex-direction: column">
+                                <div style="display: flex;flex-direction: row;margin-left: 20px">
+
+                                    <div style="display: flex;flex-direction: row;width: 180px">
+                                    <div><img src="images/p10.png"  height="70px"></div>
+                                        <div style="margin-top:21px;margin-left: 5px">WATCH Ultimate系列</div>
+                                    </div>
+
+                                    <div style="display: flex;flex-direction: row;margin-left: 90px;width: 180px">
+                                    <div><img src="images/p11.png" height="70px"></div>
+                                        <div style="margin-top:21px;margin-left: 5px">智能观影眼镜</div>
+                                    </div>
+
+                                </div>
+                                <div style="display: flex;flex-direction: row;margin-left: 20px">
+
+                                    <div style="display: flex;flex-direction: row;width: 180px">
+                                    <div><img src="images/p12.png"  height="70px"></div>
+                                        <div style="margin-top:21px;margin-left: 5px">WATCH系列</div>
+                                    </div>
+
+                                    <div style="display: flex;flex-direction: row;margin-left: 90px;width: 180px">
+                                    <div><img src="images/p13.png" height="70px"></div>
+                                        <div style="margin-top:21px;margin-left: 5px">配件周边</div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list_group">
+
+                        </div>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+        <div style="background-image: url('images/bg1.jpg'); background-size: cover; flex: 1;margin-left: -160px;height: 560px"></div>
+    </div>
+
+    <div style="margin-top:25px;height: 250px;background-color: rgb(241, 243, 245);">
+
+        <div class='gg' style="margin-left:170px;width: 1200px"><a href="#"><img src="images/gg.png" width="1200px" height="200px"></a></div>
+</div>
+
+    <div style="background-color: rgb(241, 243, 245);height: 500px">
+    <div style="font-size: 25px;margin-left: 160px">甄选推荐</div>
+        <div class='shop1' style="margin-top:15px;background-color: rgb(241, 243, 245);width: 1120px;margin-left: 160px;height: 350px;display: flex;flex-direction: row">
+        <div style="width: 300px;height: 350px;background-color: white;">
+            <a href="#"><div><img src="images/zx1.png"  height="250px"></div>
+            <div style="margin-left: 65px;margin-top: 5px;height: 25px;width: 250px">HUAWEI Mate 60 Pro+</div>
+            <div style="margin-left: 58px;color: rgb(144, 144, 144);font-size: 14px;margin-top: 5px;height: 15px">双卫星通信|超可靠玄武架构</div>
+            <div style="margin-left: 105px;margin-top: 8px;font-size: 17px;height: 15px">¥8999元起</div></a>
+        </div>
+<div style="width: 300px;height: 350px;background-color: white;margin-left: 25px;"><a href="#"><div><img src="images/zx2.png"  height="250px"></div>
+            <div style="margin-left: 35px;margin-top: 5px;height: 25px;width: 250px">HUAWEI MatePad 11英寸 2023款</div>
+            <div style="margin-left: 58px;color: rgb(144, 144, 144);font-size: 14px;margin-top: 5px;height: 15px">120Hz高刷新率|2.5K超高清全面屏</div>
+            <div style="margin-left: 105px;margin-top: 8px;font-size: 17px;height: 15px">¥1999元起</div></a></div>
+            <div style="width: 300px;height: 350px;background-color: white;margin-left: 25px;">
+                <a href="#"><div><img src="images/zx3.png"  height="250px"></div>
+            <div style="margin-left: 45px;margin-top: 5px;height: 25px;width: 250px">HUAWEI FreeBuds Lipstick 2</div>
+            <div style="margin-left: 58px;color: rgb(144, 144, 144);font-size: 14px;margin-top: 5px;height: 15px">美学先锋|精奢匠艺|造型百变</div>
+            <div style="margin-left: 105px;margin-top: 8px;font-size: 17px;height: 15px">¥1699元起</div></a>
+            </div>
+            <div style="width: 300px;height: 350px;background-color: white;margin-left: 25px;">
+                <a href="#"><div><img src="images/zx4.png"  height="250px"></div>
+            <div style="margin-left: 75px;margin-top: 5px;height: 25px;width: 250px">盒温智能门锁Plus</div>
+            <div style="margin-left: 58px;color: rgb(144, 144, 144);font-size: 14px;margin-top: 5px;height: 15px">人脸识别|降噪锁体|超长续航</div>
+            <div style="margin-left: 105px;margin-top: 8px;font-size: 17px;height: 15px">¥2899元起</div></a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript" src="http://127.0.0.1:8080/js/index.js"></script>
+
+
+</body>
+</html>
